@@ -40,19 +40,18 @@
 
 ### Block Embedding Model—BERT（4 Task）
 
+**作用**：训练汇编语言的BERT语言模型，将汇编语言BERT用于cfg图编码生成Block Embedding CFG
 
+#### BERT模型训练
 
-主要操作：
+训练任务：
 
-- Block Embedding model train
+- **语言模型任务（MLM）**：token-level，输入mask一些token的block内token sequence，然后预测mask的token，学习block内语义信息
+- **块连接节点预测任务（NSP）**：block-level，提取一个函数图的block之间的全部关系形成邻接矩阵，然后随机mask一些，判断两个节点是否邻接
+- **块同图任务（BIG）**：block-level，随机选择两个block，判断是否在一个图中。
+- **图分类任务（GC）**：graph-level，判断来CFG来自于不同的平台、编译器。
 
-
-
-- 原始指令cfg—>block embedding cfg
-
-  
-
-
+![image-20220725172130374](images/image-20220725172130374.png)
 
 
 
