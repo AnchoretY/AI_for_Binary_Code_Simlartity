@@ -8,9 +8,7 @@
 
 ### 整体情况
 
-
-
-
+![image-20220725172409344](images/image-20220725172409344.png)
 
 ### 预处理
 
@@ -44,18 +42,25 @@
 
 #### BERT模型训练
 
-训练任务：
+**训练任务：**
 
-- **语言模型任务（MLM）**：token-level，输入mask一些token的block内token sequence，然后预测mask的token，学习block内语义信息
-- **块连接节点预测任务（NSP）**：block-level，提取一个函数图的block之间的全部关系形成邻接矩阵，然后随机mask一些，判断两个节点是否邻接
-- **块同图任务（BIG）**：block-level，随机选择两个block，判断是否在一个图中。
-- **图分类任务（GC）**：graph-level，判断来CFG来自于不同的平台、编译器。
+- **语言模型任务（MLM）**：token-level，输入为mask一些token的基本块指令，然后预测mask的token，学习block内语义信息。
+- **块连接节点预测任务（NSP）**：block-level，正样本为一个CFG中相邻的两个基本块指令，负样本为一个CFG中相邻的两个基本块指令中一个随机替换为同一个图中的其他基本块指令，预测两个block是否相邻。
+- **块同图任务（BIG）**：block-level，随机选择两个基本块指令，判断是否在一个图中。
+- **图分类任务（GC）**：graph-level，输入一个基本块指令，判断基本块指令属于的平台、编译器。
 
 ![image-20220725172130374](images/image-20220725172130374.png)
 
 
 
+#### 使用BERT进行block embedding
 
+目标：使用训练好的BERT模型对CFG图中每个节点进行Embedding，获得Block embedding cfg用于后续func embedding的训练
+
+实现：
+
+- CFG图中每个基本块中的指令构成以” “为连接符进行拼接
+- 
 
 
 
